@@ -1,0 +1,121 @@
+{% extends 'base.html'%}
+{% block title %}
+<meta name="description" content=" Anime {{episode.epanmname.title}} episode number {{episode.epnumber}}">
+<meta name="keywords" content="Anime,Animesite,Anime {{episode.epanmname.title}} episode number {{episode.epnumber}} Animesite ,Anime {{episode.epanmname.title}},{{episode.epanmname.title}}">
+<title> Anime {{episode.epanmname.title}} episode number {{episode.epnumber}} Animesite</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="{%url 'home' %}"><i class="fa fa-home"></i> Home</a>
+                    <span>{{episode.epanmname.title}} episode number {{episode.epnumber}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+{%if details%}
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="anime__details__pic set-bg" data-setbg="{{episode.epanmname.image.url}}">
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3>{{episode.epanmname.title}}</h3>
+                        </div>
+                        <div class="anime__details__rating">
+                            <span>{{episode.epanmname.rating}} Votes</span>
+                        </div>
+                        <p>{{episode.epanmname.description}}</p>
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Studios:</span> {{episode.epanmname.studio}}</li>
+                                        <li><span>Date aired:</span>{{episode.epanmname.years_of_production}}</li>
+                                        
+                                        <li><span>Genre:</span>
+                                            {%for i in episode.epanmname.category.all%}
+                                        {{i}} 
+                                            {%endfor%}
+                                             
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Rating:</span> {{episode.epanmname.rating}} /10</li>
+                                        <li><span>Duration:</span> 24 min/ep</li>
+                                        <li><span>Quality:</span> HD</li>
+                                        <li><span>Views:</span> 131,541</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime__details__btn">
+                            <a href="#card" class="watch-btn" style="margin-right: 3%;"><span>Watch And Download</span> <i
+                                class="fa fa-angle-right"></i></a>
+                                <a href="{{episode.epanmname.trailer}}" class="watch-btn"><span>Watch the  trailer</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </section>
+    {%endif%}
+    <!-- Anime Section End -->
+
+
+
+
+
+
+<!-- Breadcrumb End -->
+
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card" style="background-color: black;" id="card">
+              <div class="anime__video__player" style="margin-bottom:0 ;">
+                  
+                      <iframe src="{{episode.epurl}}" frameborder="5" style="width: 100%;height: 500px;" id="iframe"></iframe>
+                      <!-- Captions are optional -->
+
+              </div>
+              <a href="{{episode.epdlink}}" class="btn btn-primary btn-lg" tabindex="-1" role="button">Download</a>
+            </div>
+              <div class="anime__details__episodes" style="margin-top: 2%;">
+                  <div class="section-title">
+                      <h5>List Episodes</h5>
+                  </div>
+                  {%for i in episode_list%}
+                  <a href="{%url 'watching' i.epslug%}">Ep 0{{i.epnumber}}</a>
+                  {%endfor%}
+              </div>
+          </div>
+      </div>
+  
+  </div>
+</section>
+<!-- Anime Section End -->
+
+
+
+{%endblock content%}

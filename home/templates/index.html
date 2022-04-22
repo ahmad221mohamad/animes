@@ -1,0 +1,164 @@
+{% extends 'base.html'%}
+{% block title %}
+<meta name="description" content="Site for watching animes">
+<meta name="keywords" content="Anime,Animesite,watching,episode">
+<title>Home Page Animesite</title>
+{% endblock title %}
+
+{% block content %}
+<div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:5%;">
+<div class="section-title">
+    <h5>MOST WATHED</h5>
+</div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="trending__product">
+                    <div class="row">
+{%for i in anime_list%}
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="product__item">
+      <div class="product__item__pic set-bg" data-setbg="{{i.image.url}}">
+          <div class="ep">{{i.episode_numbers}}</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+      </div>
+      <div class="product__item__text">
+          <ul>{%for i in i.category.all%}
+              <li>{{i}}</li>
+              {%endfor%}
+              
+          </ul>
+          <h5><a href="{%url 'watching' i.slug%}">{{i.title}}</a></h5>
+      </div>
+  </div>
+</div>
+{%endfor%}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center>
+        <div class="pagination">
+            <span class="step-links">
+                {% if anime_list.has_previous %}
+                    <a href="?page={{ anime_list.previous_page_number }}" class="btn btn-primary stretched-link">previous</a>
+                {% endif %}
+        
+        
+        
+                {% if anime_list.has_next %}
+                    <a href="?page={{ anime_list.next_page_number }}" class="btn btn-primary stretched-link">next</a>
+                    
+                {% endif %}
+            </span>
+        </div>
+    </center>
+    </div>
+
+
+<div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:5%;">
+<div class="section-title">
+    <h5>RECRNTLY ADDED</h5>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="trending__product">
+                <div class="row">
+{%for i in anime_list1%}
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="product__item">
+      <div class="product__item__pic set-bg" data-setbg="{{i.image.url}}">
+          <div class="ep">{{i.episode_numbers}}</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+      </div>
+      <div class="product__item__text">
+          <ul>{%for i in i.category.all%}
+              <li>{{i}}</li>
+              {%endfor%}
+              
+          </ul>
+          <h5><a href="{%url 'watching' i.slug%}">{{i.title}}</a></h5>
+      </div>
+  </div>
+</div>
+
+{%endfor%}
+</div>
+</div>
+</div>
+</div>
+<center>
+    <div class="pagination">
+        <span class="step-links">
+            {% if anime_list1.has_previous %}
+                <a href="?page1={{ anime_list1.previous_page_number }}" class="btn btn-primary stretched-link">previous</a>
+            {% endif %}
+    
+    
+    
+            {% if anime_list1.has_next %}
+                <a href="?page1={{ anime_list1.next_page_number }}" class="btn btn-primary stretched-link">next</a>
+                
+            {% endif %}
+        </span>
+    </div>
+</center>
+</div>
+<div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:5%;">
+<div class="section-title">
+    <h5>TOP RATED</h5>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="trending__product">
+                <div class="row">
+{%for i in anime_list2%}
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="product__item">
+      <div class="product__item__pic set-bg" data-setbg="{{i.image.url}}">
+          <div class="ep">{{i.episode_numbers}}</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+      </div>
+      <div class="product__item__text">
+          <ul>{%for i in i.category.all%}
+              <li>{{i}}</li>
+              {%endfor%}
+              
+          </ul>
+          <h5><a href="{%url 'watching' i.slug%}">{{i.title}}</a></h5>
+      </div>
+  </div>
+</div>
+
+{%endfor%}
+</div>
+</div>
+</div>
+</div>
+<center>
+    <div class="pagination">
+        <span class="step-links">
+            {% if anime_list2.has_previous %}
+                <a href="?page2={{ anime_list2.previous_page_number }}" class="btn btn-primary stretched-link">previous</a>
+            {% endif %}
+    
+    
+    
+            {% if anime_list2.has_next %}
+                <a href="?page2={{ anime_list2.next_page_number }}" class="btn btn-primary stretched-link">next</a>
+                
+            {% endif %}
+        </span>
+    </div>
+</center>
+</div>
+{%endblock content%}

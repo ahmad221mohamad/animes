@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% block title %}
+<meta name="description" content="Resulte for: {{search_words}}">
+<title>Resulte for: {{search_words}} Animesite</title>
+{% endblock title %}
+{% block content %}
+<div class="section-title">
+    <h5>RESULTE</h5>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="trending__product">
+                <div class="row">
+{%for i in anime_list%}
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="product__item">
+      <div class="product__item__pic set-bg" data-setbg="{{i.image.url}}">
+          <div class="ep">{{i.episode_numbers}}</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+      </div>
+      <div class="product__item__text">
+          <ul>{%for i in i.category.all%}
+              <li>{{i}}</li>
+              {%endfor%}
+              
+          </ul>
+          <h5><a href="{%url 'watching' i.slug%}">{{i.title}}</a></h5>
+      </div>
+  </div>
+</div>
+{%endfor%}
+</div>
+</div>
+</div>
+</div>
+</div>
+{%endblock content%}
