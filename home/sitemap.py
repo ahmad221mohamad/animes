@@ -4,7 +4,7 @@ from django.contrib.sitemaps import Sitemap
 class AnimeSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.8
-    protocol = 'http'
+    protocol = 'https'
 
     def items(self):
         return Anime.objects.all()
@@ -16,7 +16,7 @@ class AnimeSitemap(Sitemap):
 class EpisodesSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.8
-    protocol = 'http'
+    protocol = 'https'
 
     def items(self):
         return Episodes.objects.all()
