@@ -7,13 +7,13 @@ from django.core.paginator import Paginator
 # Create your views here.
 def home(request):
     category_list=models.Category.objects.all()
-    paginator=Paginator(models.Anime.objects.filter(status='MW'),5)
+    paginator=Paginator(models.Anime.objects.filter(status='MW'),9)
     page_number = request.GET.get('page')
     anime_list = paginator.get_page(page_number)
-    paginator1=Paginator(models.Anime.objects.filter(status='RA'),5)
+    paginator1=Paginator(models.Anime.objects.filter(status='RA'),9)
     page_number1 = request.GET.get('page1')
     anime_list1 = paginator1.get_page(page_number1)
-    paginator2=Paginator(models.Anime.objects.filter(status='TR'),5)
+    paginator2=Paginator(models.Anime.objects.filter(status='TR'),9)
     page_number2 = request.GET.get('page2')
     anime_list2 = paginator2.get_page(page_number2)
     context={'anime_list':anime_list,'anime_list1':anime_list1,'anime_list2':anime_list2,'category_list':category_list}
@@ -31,9 +31,8 @@ def watching(request,epslug):
     return render(request,'watching.html',context)
 def search(request):
     category_list=models.Category.objects.all()
-    if request.method=='POST':
-        search_words=request.POST.get('search_words')
-        anime_list=models.Anime.objects.filter(title__contains=search_words)
+    search_words=request.POST.get('search_words')
+    anime_list=models.Anime.objects.filter(title__contains=str(search_words))
     context={'anime_list':anime_list,'category_list':category_list,'search_words':search_words}
     return render(request,'resulte_page.html',context)
 

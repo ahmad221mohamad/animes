@@ -1,13 +1,20 @@
 {% extends 'base.html'%}
 {% block title %}
+{%if LANGUAGE_CODE == 'en'%}
 <meta name="description" content="Resulte for: {{search_words}}">
 <title>Resulte for: {{search_words}} Animesite</title>
+{%else%}
+<meta name="description" content="نتائج بحث ل: {{search_words}}">
+<title>نتائج بحث ل: {{search_words}} Animesite</title>
+{%endif%}
 {% endblock title %}
 {% block content %}
+{%if LANGUAGE_CODE == 'en'%}
+<div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:5%;">
 <div class="section-title">
-    <h5>RESULTE</h5>
+    <h5>RESULTES</h5>
 </div>
-
+</div>
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
@@ -36,4 +43,40 @@
 </div>
 </div>
 </div>
+{%else%}
+<div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:5%;">
+<div class="section-title" style="float: right;">
+    <h5>النتائج</h5>
+</div>
+</div>
+<div class="container" style="margin-top:10%; text-align: right;">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="trending__product">
+                <div class="row">
+{%for i in anime_list%}
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="product__item">
+      <div class="product__item__pic set-bg" data-setbg="{{i.image.url}}">
+          <div class="ep">{{i.episode_numbers}}</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+      </div>
+      <div class="product__item__text">
+          <ul>{%for i in i.category.all%}
+              <li>{{i}}</li>
+              {%endfor%}
+              
+          </ul>
+          <h5><a href="{%url 'watching' i.slug%}">{{i.title}}</a></h5>
+      </div>
+  </div>
+</div>
+{%endfor%}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{%endif%}
 {%endblock content%}

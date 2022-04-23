@@ -5,6 +5,8 @@ from django.utils.text import slugify
 # Create your models here.
 class Category(models.Model):
     catname=models.CharField(max_length=50)
+    catname_ar=models.CharField(max_length=50,null=True,blank=True)
+
     def __str__(self):
         return self.catname
 STATUS=(
@@ -14,9 +16,10 @@ STATUS=(
 )
 class Anime(models.Model):
     title=models.CharField(max_length=100)
-    description=models.TextField(max_length=1000)
+    description=models.TextField(max_length=1000,null=True,blank=True)
+    description_ar=models.TextField(max_length=1000,null=True,blank=True)
     image=CloudinaryField('image')
-    category=models.ManyToManyField(Category)
+    category=models.ManyToManyField(Category,blank=True)
     status=models.CharField(choices=STATUS,max_length=2)
     years_of_production=models.DateField()
     views_counts=models.IntegerField(default=0)

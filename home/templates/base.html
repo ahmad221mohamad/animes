@@ -1,7 +1,11 @@
 {% load static%}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="zxx">
-
+{%if LANGUAGE_CODE == 'en'%}
+<html dir="ltr" lang="en">
+{%else%}
+<html dir="rtl" lang="ar">
+{%endif%}
 <head>
     <meta charset="UTF-8">
     
@@ -47,17 +51,29 @@
                   <div class="header__nav">
                       <nav class="header__menu mobile-menu">
                           <ul>
-                              <li class="active"><a href="{%url 'home' %}">Homepage</a></li>
+                            {%if LANGUAGE_CODE == 'en'%}
+                              <li class="active"><a href="{%url 'home' %}">Home page</a></li>
                               <li><a href="">Categories <span class="arrow_carrot-down"></span></a>
-                                  <ul class="dropdown">
-                                      {%for i in category_list%}
-                                      <li><a href="{%url 'categories' i.catname%}">{{i.catname}}</a></li>
-                                      {%endfor%}
-                                      
-                                  </ul>
+                                <ul class="dropdown">
+                                    {%for i in category_list%}
+                                    <li><a href="{%url 'categories' i.catname%}">{{i.catname}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                                {%else%}
+                                <li class="active"><a href="{%url 'home' %}">الصفحة الرئيسية</a></li>
+                                <li><a href="">الفئات <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown" style="text-align: right;">
+                                    {%for i in category_list%}
+                                    <li><a href="{%url 'categories' i.catname%}">{{i.catname_ar}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                                {%endif%}
+                                
                               </li>
                           </ul>
+                          
                       </nav>
+                      
                   </div>
               </div>
               <div class="col-lg-2">
@@ -68,6 +84,21 @@
           </div>
           <div id="mobile-menu-wrap"></div>
       </div>
+
+      <form action="{% url 'set_language' %}" method="post" >{% csrf_token %}
+        {% get_current_language as LANGUAGE_CODE %}                                         
+        <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+        {% if LANGUAGE_CODE == 'ar' %}
+            <button type='submit' name='language' value='en' class="btn btn-outline-danger" style="float:left;margin-bottom: 2%;margin-left: 2%;">
+                <span class="label"></span>English
+            </button>
+        {% else %}
+            <button type='submit' name='language' value='ar' class="btn btn-outline-danger" style="float:right;margin-bottom: 2%;margin-right: 2%;">
+                <span class="label"></span>عربي
+            </button>
+        {% endif %}
+    </form>
+
   </header>
     {%block content%}
 
@@ -88,7 +119,11 @@
             <div class="col-lg-6">
                 <div class="footer__nav">
                     <ul>
-                        <li class="active"><a href="{%url 'home' %}">Homepage</a></li>
+                        {%if LANGUAGE_CODE == 'en'%}
+                        <li class="active"><a href="{%url 'home' %}">Home page</a></li>
+                        {%else%}
+                        <li class="active"><a href="{%url 'home' %}">الصفحة الرئيسية</a></li>
+                        {%endif%}
                     </ul>
                 </div>
             </div>
@@ -110,7 +145,11 @@
         <div class="search-close-switch"><i class="icon_close"></i></div>
         <form class="search-model-form"  method="post" action="{%url 'search' %}" >
             {% csrf_token %}
+            {%if LANGUAGE_CODE == 'en'%}
             <input type="search" id="search-input" placeholder="Search here....." name="search_words" >
+            {%else%}
+            <input type="search" id="search-input" placeholder="ابحث هنا .." name="search_words" >
+            {%endif%}
         </form>
     </div>
 </div>
