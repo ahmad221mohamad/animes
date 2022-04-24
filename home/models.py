@@ -42,5 +42,5 @@ class Episodes(models.Model):
     epdlink=models.URLField(blank=True,null=True)
     def save(self,*args,**kwargs):
         if not self.epslug:
-            self.epslug=slugify(self.epanmname.title+str(self.epnumber))
+            self.epslug=slugify(self.epanmname.title+'-ep-'+str(self.epnumber))
         super(Episodes,self).save()

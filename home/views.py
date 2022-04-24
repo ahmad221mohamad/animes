@@ -24,7 +24,7 @@ def watching(request,epslug):
     try:
         episode=models.Episodes.objects.get(epslug=epslug)
     except:
-        episode=models.Episodes.objects.get(epslug=epslug+'1')
+        episode=models.Episodes.objects.get(epslug=epslug+'-ep-'+'1')
         details=True
     episode_list=models.Episodes.objects.filter(epanmname=episode.epanmname)
     context={'episode':episode,'episode_list':episode_list,'details':details,'category_list':category_list}
