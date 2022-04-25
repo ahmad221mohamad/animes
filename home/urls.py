@@ -8,7 +8,7 @@ sitemaps = {
 }
 urlpatterns = [
    path('',views.home,name='home'),
-   path("watching-<str:epslug>",views.watching,name='watching'),
+   path("watching/<str:epslug>",views.watching,name='watching'),
    path('search-resulte',views.search,name='search'),
    path('categories-<str:categories>',views.categories,name='categories'),
    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
