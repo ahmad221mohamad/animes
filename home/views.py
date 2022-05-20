@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from . import models
 from django.core.paginator import Paginator
-from django.http import JsonResponse
-from django.core import serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import permissions
+from .models import Anime, Episodes
+from .serializers import AnimeSerializer, EpSerializer
+
 # Create your views here.
 def home(request):
     category_list=models.Category.objects.all()
@@ -41,11 +46,27 @@ def categories(request,categories):
     anime_list=models.Anime.objects.filter(category=category)
     context={'anime_list':anime_list,'category_list':category_list,'category':category}
     return render(request,'categories.html',context)
-def jsondata(request):
-    data =list(models.Anime.objects.all())
-    json= serializers.serialize('json', data)
-    return JsonResponse(json,safe=False)
-def jsondataep(request):
-    data =list(models.Episodes.objects.all())
-    json= serializers.serialize('json', data)
-    return JsonResponse(json,safe=False)
+class AnimeListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        todos = Anime.objects.all()
+        serializer = AnimeSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+class EpListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.IsAuthenticated]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        todos = Episodes.objects.all()
+        serializer = EpSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

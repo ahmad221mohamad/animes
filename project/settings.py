@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'home',
     'django_truncate',
     'django_heroku',
-     'corsheaders',
+    'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

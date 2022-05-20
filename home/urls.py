@@ -8,8 +8,8 @@ sitemaps = {
 }
 urlpatterns = [
    path('',views.home,name='home'),
-   path('json',views.jsondata),
-   path('json/ep',views.jsondataep),
+   path('api',views.AnimeListApiView.as_view()),
+   path('ep/api',views.EpListApiView.as_view()),
    path("watching/<str:epslug>",views.watching,name='watching'),
    path('search-resulte',views.search,name='search'),
    path('categories-<str:categories>',views.categories,name='categories'),
