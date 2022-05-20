@@ -42,10 +42,10 @@ def categories(request,categories):
     context={'anime_list':anime_list,'category_list':category_list,'category':category}
     return render(request,'categories.html',context)
 def jsondata(request):
-    data =models.Anime.objects.all()
+    data =list(models.Anime.objects.all())
     json= serializers.serialize('json', data)
     return JsonResponse(json,safe=False)
 def jsondataep(request):
-    data =models.Episodes.objects.all()
+    data =list(models.Episodes.objects.all())
     json= serializers.serialize('json', data)
     return JsonResponse(json,safe=False)
