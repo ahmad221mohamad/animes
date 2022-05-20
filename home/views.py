@@ -1,9 +1,8 @@
-from operator import mod
-from unicodedata import category
 from django.shortcuts import render
 from . import models
-from django.db.models import Q
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.core import serializers
 # Create your views here.
 def home(request):
     category_list=models.Category.objects.all()
@@ -42,3 +41,11 @@ def categories(request,categories):
     anime_list=models.Anime.objects.filter(category=category)
     context={'anime_list':anime_list,'category_list':category_list,'category':category}
     return render(request,'categories.html',context)
+def jsondata(request):
+    data =models.Anime.objects.all()
+    json= serializers.serialize('json', data)
+    return JsonResponse(json,safe=False)
+def jsondataep(request):
+    data =models.Episodes.objects.all()
+    json= serializers.serialize('json', data)
+    return JsonResponse(json,safe=False)
