@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from .models import Anime, Episodes
-from .serializers import AnimeSerializer, EpSerializer
+from .serializers import AnimeSerializer
+from rest_framework.permissions import AllowAny
 
 # Create your views here.
 def home(request):
@@ -48,25 +48,23 @@ def categories(request,categories):
     return render(request,'categories.html',context)
 class AnimeListApiView(APIView):
     # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     # 1. List all
     def get(self, request, *args, **kwargs):
         '''
         List all the todo items for given requested user
         '''
-        todos = Anime.objects.all()
+        todos = models.Anime.objects.all()
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-class EpListApiView(APIView):
-    # add permission to check if user is authenticated
-    permission_classes = [permissions.IsAuthenticated]
 
-    # 1. List all
-    def get(self, request, *args, **kwargs):
+
+class AnimeoDetailApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    def ep(self, anime_id, user_id):
         '''
-        List all the todo items for given requested user
+        Helper method to get the object with given todo_id, and user_id
         '''
-        todos = Episodes.objects.all()
-        serializer = EpSerializer(todos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
