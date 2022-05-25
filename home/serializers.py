@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Anime,Episodes
+from .models import Anime, Category,Episodes
 class AnimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Anime
@@ -28,4 +28,12 @@ class EpSerializer(serializers.ModelSerializer):
             "epurl",
             "epslug",
             "epdlink",
+        ]
+class CatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = [
+            "id",
+           "catname",
+           "catname_ar",
         ]
