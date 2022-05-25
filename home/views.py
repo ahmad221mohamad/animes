@@ -59,6 +59,20 @@ class AnimeListApiView(APIView):
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class Anime_imgListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        id=request.query_params['anime_id']
+        todos = models.Anime.objects.filter(id=id)
+        serializer = AnimeSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class AnimeoDetailApiView(APIView):
     # add permission to check if user is authenticated
