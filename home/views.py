@@ -84,3 +84,16 @@ class CatDetailApiView(APIView):
         todos = models.Category.objects.filter(id=id)
         serializer = CatSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class EpsApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        todos = models.Episodes.objects.all().order_by("-id")
+        serializer = EpSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

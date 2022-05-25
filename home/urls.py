@@ -10,6 +10,7 @@ urlpatterns = [
    path('',views.home,name='home'),
    path('api',views.AnimeListApiView.as_view()),
    path('api/ep/',views.AnimeoDetailApiView.as_view()),
+   path('api/ep_list/',views.EpsApiView.as_view()),
    path('api/cat/',views.CatDetailApiView.as_view()),
    path("watching/<str:epslug>",views.watching,name='watching'),
    path('search-resulte',views.search,name='search'),
