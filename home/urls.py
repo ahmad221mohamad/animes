@@ -9,6 +9,7 @@ sitemaps = {
 urlpatterns = [
    path('',views.home,name='home'),
    path('api',views.AnimeListApiView.as_view()),
+   path('api/search/',views.Anime_SearchListApiView.as_view()),
    path('api/anime/',views.Anime_imgListApiView.as_view()),
    path('api/ep/',views.AnimeoDetailApiView.as_view()),
    path('api/ep_list/',views.EpsApiView.as_view()),

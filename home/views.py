@@ -111,3 +111,17 @@ class EpsApiView(APIView):
         todos = models.Episodes.objects.all().order_by("-id")
         serializer = EpSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class Anime_SearchListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        keyword=request.query_params['keyword']
+        todos = models.Anime.objects.filter(title__contains=str(keyword))
+        serializer = AnimeSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
