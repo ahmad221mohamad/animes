@@ -125,3 +125,16 @@ class Anime_SearchListApiView(APIView):
         todos = models.Anime.objects.filter(title__icontains=str(keyword))
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class Catgories_ListApiView(APIView):
+    # add permission to check if user is authenticated
+    permission_classes = [permissions.AllowAny]
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        todos = models.Category.objects.all()
+        serializer = CatSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
