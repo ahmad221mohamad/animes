@@ -122,6 +122,6 @@ class Anime_SearchListApiView(APIView):
         List all the todo items for given requested user
         '''
         keyword=request.query_params['keyword']
-        todos = models.Anime.objects.filter(title__contains=str(keyword))
+        todos = models.Anime.objects.filter(title__icontains=str(keyword))
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
