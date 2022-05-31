@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from . import models
 from django.core.paginator import Paginator
@@ -6,8 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from .serializers import AnimeSerializer, CatSerializer, EpSerializer
-from rest_framework.permissions import AllowAny
-
+from django.db.models import Q
 # Create your views here.
 def home(request):
     category_list=models.Category.objects.all()
@@ -122,7 +122,11 @@ class Anime_SearchListApiView(APIView):
         List all the todo items for given requested user
         '''
         keyword=request.query_params['keyword']
-        todos = models.Anime.objects.filter(title__icontains=str(keyword))
+        try:
+            todos = models.Anime.objects.filter(category=int(keyword))
+            print("int")
+        except:
+            todos = models.Anime.objects.filter(title__icontains=str(keyword))
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
