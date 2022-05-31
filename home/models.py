@@ -27,7 +27,7 @@ class Anime(models.Model):
     studio=models.CharField(max_length=50,null=True,blank=True)
     rating=models.FloatField(default=0)
     trailer=models.URLField(null=True,blank=True)
-    slug=models.SlugField(blank=True,null=True)
+    slug=models.SlugField(blank=True,null=True,max_length=1000)
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.title)
@@ -38,7 +38,7 @@ class Episodes(models.Model):
     epanmname=models.ForeignKey(Anime,on_delete=models.CASCADE)
     epnumber=models.IntegerField(default=0)
     epurl=models.URLField(blank=True,null=True)
-    epslug=models.SlugField(blank=True,null=True)
+    epslug=models.SlugField(blank=True,null=True,max_length=1000)
     epdlink=models.URLField(blank=True,null=True)
     def save(self,*args,**kwargs):
         if not self.epslug:
