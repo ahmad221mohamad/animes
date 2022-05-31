@@ -15,7 +15,7 @@ STATUS=(
     ('TR','TOP RATED'),
 )
 class Anime(models.Model):
-    title=models.CharField(max_length=100)
+    title=models.CharField(max_length=1000)
     description=models.TextField(max_length=1000,null=True,blank=True)
     description_ar=models.TextField(max_length=1000,null=True,blank=True)
     image=CloudinaryField('image')
