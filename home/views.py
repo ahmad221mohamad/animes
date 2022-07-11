@@ -126,7 +126,7 @@ class Anime_SearchListApiView(APIView):
             todos = models.Anime.objects.filter(category=int(keyword))
             print("int")
         except:
-            todos = models.Anime.objects.filter(title__icontains=str(keyword))
+            todos = models.Anime.objects.filter(Q(title__icontains=str(keyword))|Q(studio=str(keyword)))
         serializer = AnimeSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
