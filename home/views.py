@@ -83,7 +83,7 @@ class AnimeoDetailApiView(APIView):
         List all the todo items for given requested user
         '''
         id=request.query_params['id']
-        todos = models.Episodes.objects.filter(epanmname=id)
+        todos = models.Episodes.objects.filter(epanmname=id).order_by("epnumber")
         serializer = EpSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 class CatDetailApiView(APIView):

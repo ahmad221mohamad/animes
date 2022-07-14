@@ -44,3 +44,5 @@ class Episodes(models.Model):
         if not self.epslug:
             self.epslug=slugify(self.epanmname.title+'-ep-'+str(self.epnumber))
         super(Episodes,self).save()
+    def __str__(self):
+        return self.epslug
