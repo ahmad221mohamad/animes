@@ -97,13 +97,12 @@
               <div class="anime__details__episodes" style="margin-top: 2%;">
                   <div class="section-title">
                       <h5>List Episodes</h5>
-                 
+                  </div>
+                  {%for i in episode_list%}
+                  <a href="{%url 'watching' i.epslug%}">Ep 0{{i.epnumber}}</a>
+                  {%endfor%}
+              </div>
           </div>
-        </div>
-        {%for i in episode_list%}
-        <a href="{%url 'watching' i.epslug%}">Ep 0{{i.epnumber}}</a>
-        {%endfor%}
-    </div>
       </div>
   
   </div>
@@ -196,15 +195,14 @@
               <a href="{{episode.epdlink}}" class="btn btn-primary btn-lg" tabindex="-1" role="button">تحميل</a>
             </div>
               <div class="anime__details__episodes" style="margin-top: 2%;float: right;">
-                  <div class="section-title">
+                  <div class="section-title" style="position: right;">
                       <h5>الحلقات</h5>
-                  
+                  </div>
+                  {%for i in episode_list%}
+                  <a href="{%url 'watching' i.epslug%}">الحلقة {{i.epnumber}}</a>
+                  {%endfor%}
+              </div>
           </div>
-        </div>
-        {%for i in episode_list%}
-        <a href="{%url 'watching' i.epslug%}">الحلقة {{i.epnumber}}</a>
-        {%endfor%}
-    </div>
       </div>
   
   </div>
