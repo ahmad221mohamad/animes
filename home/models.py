@@ -41,11 +41,14 @@ class Episodes(models.Model):
     epslug=models.SlugField(blank=True,null=True,max_length=1000)
     epdlink=models.URLField(blank=True,null=True)
     epimage=CloudinaryField(blank=True,null=True)
+    epanmtitle=models.CharField(max_length=1000,blank=True,null=True)
     def save(self,*args,**kwargs):
         if not self.epslug:
             self.epslug=slugify(self.epanmname.title+'-ep-'+str(self.epnumber))
         if not self.epimage:
             self.epimage=self.epanmname.image
+        if not self.epanmtitle:
+            self.epanmtitle=self.epanmname.title
         super(Episodes,self).save()
         
     def __str__(self):

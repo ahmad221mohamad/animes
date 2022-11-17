@@ -30,6 +30,7 @@ class EpSerializer(serializers.ModelSerializer):
             "epdlink",
             "id",
             "epimage",
+            "epanmtitle",
         ]
 class CatSerializer(serializers.ModelSerializer):
     class Meta:
