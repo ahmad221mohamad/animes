@@ -40,9 +40,13 @@ class Episodes(models.Model):
     epurl=models.URLField(blank=True,null=True)
     epslug=models.SlugField(blank=True,null=True,max_length=1000)
     epdlink=models.URLField(blank=True,null=True)
+    epimage=CloudinaryField(blank=True,null=True)
     def save(self,*args,**kwargs):
         if not self.epslug:
             self.epslug=slugify(self.epanmname.title+'-ep-'+str(self.epnumber))
+        if not self.epimage:
+            self.epimage=self.epanmname.image
         super(Episodes,self).save()
+        
     def __str__(self):
-        return self.epslug
+        return self.epslug,self.epimage
