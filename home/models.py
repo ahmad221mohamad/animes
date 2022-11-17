@@ -49,4 +49,4 @@ class Episodes(models.Model):
         super(Episodes,self).save()
         
     def __str__(self):
-        return self.epslug,
+        return self.epslug
