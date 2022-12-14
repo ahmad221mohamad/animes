@@ -34,6 +34,7 @@ def watching(request,epslug):
     context={'episode':episode,'episode_list':episode_list,'details':details,'category_list':category_list}
     return render(request,'watching.html',context)
 def search(request):
+    
     category_list=models.Category.objects.all()
     search_words=request.POST.get('search_words')
     anime_list=models.Anime.objects.filter(title__contains=str(search_words))
