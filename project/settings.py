@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import django_heroku
 from pathlib import Path
 import os
 import cloudinary
@@ -27,8 +26,7 @@ SECRET_KEY = 'django-insecure--hx6!*ns$ry94aj*np&6!la6e744i4(pi@6_xurnfm=tyr&7ut
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -147,7 +145,6 @@ cloudinary.config(
   api_secret = "4bMKED0PVHoXxwy_kcIwNvYDlrY",
 )
 SITE_ID = 1
-django_heroku.settings(locals())
 REST_FRAMEWORK = {
  
 'DEFAULT_RENDERER_CLASSES':(
