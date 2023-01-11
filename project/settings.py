@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'django_truncate',
-    'django_heroku',
     'corsheaders',
     'rest_framework',
 ]
